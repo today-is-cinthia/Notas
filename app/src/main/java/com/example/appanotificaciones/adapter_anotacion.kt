@@ -34,6 +34,7 @@ class adapter_anotacion(
         val anotacion = anotacionList.get(position)
         holder.setListenner(anotacion)
         holder.binding.tvTarea.text = anotacion.tarea
+        holder.binding.chkFinalizado.isChecked = anotacion.Finalizado
     }
 
     fun add(anota: Anotacion)

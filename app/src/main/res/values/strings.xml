@@ -2,4 +2,5 @@
     <string name="app_name">AppAnotificaciones</string>
     <string name="strTarea">Tarea1</string>
     <string name="strIngresarTarea">Ingresar la Tarea</string>
+    <string name="strValidacionError">Campo requerido</string>
 </resources>

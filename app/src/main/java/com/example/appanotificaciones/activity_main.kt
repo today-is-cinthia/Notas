@@ -20,7 +20,10 @@ class activity_main : AppCompatActivity(), OnClickListener {
             Anotacion(1,"Tarea AWS"),
             Anotacion(2,"Registrar notas"),
             Anotacion(3,"Desarrollar app Anotciones"),
-            Anotacion(4,"Corregir avance laboral 6")
+            Anotacion(4,"Corregir avance laboral 6"),
+            Anotacion(5,"Realizar pedido de toner"),
+            Anotacion(6,"Continuara..."),
+            Anotacion(7,"Seguimos ...", true)
         )
         anotacionAdapter = adapter_anotacion(data, this)
         binding.rvAnotaciones.apply { layoutManager = LinearLayoutManager(this@activity_main)
@@ -33,6 +36,9 @@ class activity_main : AppCompatActivity(), OnClickListener {
                                        binding.tvDescripcionTarea.text.toString().trim())
                 addAnotacion(anota)
                 binding.tvDescripcionTarea.text?.clear()
+            }else
+            {
+                binding.tvDescripcionTarea.error = getString(R.string.strValidacionError)
             }
         }
     }

@@ -21,11 +21,16 @@
                 android:layout_width="@dimen/dimen2"
                 android:layout_height="wrap_content"
                 android:hint="@string/strIngresarTarea"
+                app:counterEnabled="true"
+                app:counterMaxLength="@integer/descripcion_maxlength"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/tvDescripcionTarea"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:maxLength="@integer/descripcion_maxlength"
+                    android:inputType="textCapCharacters"
+                    android:imeOptions="actionDone"/>
             </com.google.android.material.textfield.TextInputLayout>
             <ImageView
                 android:id="@+id/btnAgregar"
