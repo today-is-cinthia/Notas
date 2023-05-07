@@ -40,8 +40,27 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_plus"/>
         </LinearLayout>
+        <TextView
+            android:id="@+id/tvTituloPendiente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dimen1"
+            android:textAppearance="?attr/textAppearanceOverline"
+            android:text="@string/strPendientes"/>
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvAnotaciones"
+            android:id="@+id/rvTareasPendientes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_notas"/>
+        <TextView
+            android:id="@+id/tvTituloFinalizadaas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dimen1"
+            android:textAppearance="?attr/textAppearanceOverline"
+            android:text="@string/strFinalizadas"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTareasFinalizadas"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/item_notas"/>

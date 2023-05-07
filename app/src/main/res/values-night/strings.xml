@@ -3,4 +3,9 @@
     <string name="strTarea">Tarea1</string>
     <string name="strIngresarTarea">Ingresar la Tarea</string>
     <string name="strValidacionError">Campo requerido</string>
+    <string name="strPendientes">Pendientes</string>
+    <string name="strFinalizadas">Finalizadas</string>
+    <string name="strDialogoTitulo">Esta seguro de eliminar?</string>
+    <string name="strAceptar">Ok</string>
+    <string name="strCancelar">Cancelar</string>
 </resources>

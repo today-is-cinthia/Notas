@@ -3,4 +3,6 @@
     <dimen name="dimen1">12dp</dimen>
     <dimen name="dimen2">300dp</dimen>
     <dimen name="dimen3">45dp</dimen>
+    <dimen name="tamtexto1">5sp</dimen>
+    <dimen name="tamtexto2">6sp</dimen>
 </resources>
