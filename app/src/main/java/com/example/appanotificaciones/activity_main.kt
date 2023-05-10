@@ -38,7 +38,7 @@ class activity_main : AppCompatActivity(), OnClickListener {
             if(binding.tvDescripcionTarea.text.toString().isNotBlank()){
                 val anota = Anotacion((anotacionAdapter.itemCount + 1).toLong(),
                                        binding.tvDescripcionTarea.text.toString().trim())
-                anota.id = database.insertTarea(anota)!!
+                anota.id = database.insertTarea(anota)
                 if(anota.id != constants.ID_ERROR)
                 {
                     addAnotacion(anota)
@@ -110,7 +110,7 @@ class activity_main : AppCompatActivity(), OnClickListener {
             deleteAnotacion(anotacion)
             addAnotacion(anotacion)
         }else{
-            Snackbar.make(binding.root, "Ocurrio un error ala ctualizar", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(binding.root, "Ocurrio un error al actualizar", Snackbar.LENGTH_SHORT).show()
         }
     }
 }

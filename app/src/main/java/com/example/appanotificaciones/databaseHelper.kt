@@ -24,7 +24,7 @@ class databaseHelper(context: Context): SQLiteOpenHelper(context, constants.DATA
     }
 
     @SuppressLint("Range")
-    fun getTareas(): MutableList<Anotacion>{
+    fun getTareas():MutableList<Anotacion>{
 
         val tareas: MutableList<Anotacion> = mutableListOf()
         val database = this.readableDatabase
@@ -44,7 +44,7 @@ class databaseHelper(context: Context): SQLiteOpenHelper(context, constants.DATA
         return tareas
     }
 
-    fun insertTarea(anota:Anotacion): Long?{
+    fun insertTarea(anota:Anotacion): Long {
         val database = this.writableDatabase
         val contentValues = ContentValues().apply {
             put(constants.PROPERTY_DESCRIPCION, anota.tarea)
@@ -52,12 +52,6 @@ class databaseHelper(context: Context): SQLiteOpenHelper(context, constants.DATA
         }
         val resultId = database.insert(constants.ENTITY_TAREA, null, contentValues)
        return resultId
-        /** val result = database.update(
-            constants.ENTITY_TAREA,
-            contentValues,
-            "${constants.PROPERTY_ID} = ${anota.id}",
-            null
-        )**/
     }
 
     fun updateTarea(anota: Anotacion): Boolean{
