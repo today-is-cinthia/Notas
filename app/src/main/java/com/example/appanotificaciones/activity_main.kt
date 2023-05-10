@@ -6,18 +6,22 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appanotificaciones.databinding.ActivityMainBinding
 import com.example.appanotificaciones.model.Anotacion
+import com.google.android.material.snackbar.Snackbar
 
 class activity_main : AppCompatActivity(), OnClickListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var anotacionAdapter: adapter_anotacion
     private lateinit var anotacionAdapterF: adapter_anotacion
+    private lateinit var database:databaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //inicializar la clase
+        database = databaseHelper(this)
 
         anotacionAdapter = adapter_anotacion(mutableListOf(), this)
         binding.rvTareasPendientes.apply { layoutManager = LinearLayoutManager(this@activity_main)
@@ -34,8 +38,15 @@ class activity_main : AppCompatActivity(), OnClickListener {
             if(binding.tvDescripcionTarea.text.toString().isNotBlank()){
                 val anota = Anotacion((anotacionAdapter.itemCount + 1).toLong(),
                                        binding.tvDescripcionTarea.text.toString().trim())
-                addAnotacion(anota)
-                binding.tvDescripcionTarea.text?.clear()
+                anota.id = database.insertTarea(anota)!!
+                if(anota.id != constants.ID_ERROR)
+                {
+                    addAnotacion(anota)
+                    binding.tvDescripcionTarea.text?.clear()
+                    Snackbar.make(binding.root, "Se agrego una tarea", Snackbar.LENGTH_SHORT).show()
+                }else{
+                    Snackbar.make(binding.root, "Error al agregar tarea", Snackbar.LENGTH_SHORT).show()
+                }
             }else
             {
                 binding.tvDescripcionTarea.error = getString(R.string.strValidacionError)
@@ -49,17 +60,9 @@ class activity_main : AppCompatActivity(), OnClickListener {
     }
 
     private fun getData(){
-        val data = mutableListOf(
-            Anotacion(1,"Tarea AWS"),
-            Anotacion(2,"Registrar notas"),
-            Anotacion(3,"Desarrollar app Anotciones"),
-            Anotacion(4,"Corregir avance laboral 6"),
-            Anotacion(5,"Realizar pedido de toner"),
-            Anotacion(6,"Continuara..."),
-            Anotacion(7,"Seguimos ...", true)
-        )
-        data.forEach { Anotacionn ->
-            addAnotacion(Anotacionn)
+        val data = database.getTareas()
+        data.forEach{ Anotacion->
+            addAnotacion(Anotacion)
         }
     }
 
@@ -90,15 +93,25 @@ class activity_main : AppCompatActivity(), OnClickListener {
             .setTitle(getString(R.string.strDialogoTitulo))
             .setPositiveButton(getString(R.string.strAceptar),{
                 dialogInterface, i ->
-                adapters.remove(anota)
+                if(database.deleteTarea(anota)){
+                    adapters.remove(anota)
+                    Snackbar.make(binding.root, "Se elimino correctamente", Snackbar.LENGTH_SHORT).show()
+                }else{
+                    Snackbar.make(binding.root, "Error", Snackbar.LENGTH_SHORT).show()
+
+                }
         })
             .setNegativeButton(getString(R.string.strCancelar), null)
         builder.create().show()
     }
 
     override fun onChecked(anotacion: Anotacion) {
-        deleteAnotacion(anotacion)
-        addAnotacion(anotacion)
+        if(database.updateTarea(anotacion)){
+            deleteAnotacion(anotacion)
+            addAnotacion(anotacion)
+        }else{
+            Snackbar.make(binding.root, "Ocurrio un error ala ctualizar", Snackbar.LENGTH_SHORT).show()
+        }
     }
 }
 
